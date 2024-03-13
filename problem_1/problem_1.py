@@ -1,6 +1,10 @@
 import csv
 
 def take_data():
+"""
+Считывает файл students.csv 
+"""
+
 	data = []
 
 	with open('students.csv') as file:
@@ -12,6 +16,11 @@ def take_data():
 	
 
 def obrabotka(data):
+"""
+Строит словарь со значением средний оценки по классу и ключем класса
+
+data -  данные для обработке и построение словаря
+"""
 	score_table = {}
 	class_mas = []
 	table = {}
@@ -40,6 +49,12 @@ def obrabotka(data):
 		
 	
 def fix_data(data, score_table):
+"""
+Заменяет ошибки в поле оценки на среднию оценку по классу
+
+data -  данные таблицы
+score_table - словарь со значением средний оценки по классу и ключем класса
+"""
 	new_data = [data[0]]
 	for row in data[1:]:
 		if not row[4].isdigit():
@@ -49,12 +64,23 @@ def fix_data(data, score_table):
 	
 	
 def create_newtable(data):
+"""
+Создаёт таблицу student_new.csv с исправлеными значенями оценки
+
+data -  данные таблицы
+"""
 	with open('student_new.csv', 'w') as csvfile:
 		for row in data:
 			csv_write = csv.writer(csvfile)
 			csv_write.writerow(row)
 
 def search(name, data):
+"""
+Ищет в данных по Ф или ФИ или ФИО человека id проекта и оценку за него 
+
+data -  данные таблицы
+name - Ф или ФИ или ФИО человека чей id проекта и оценку нужно найти
+"""
 	score = None
 	project = None
 	for row in data:
@@ -64,6 +90,9 @@ def search(name, data):
 	return score, project
 
 def main():
+"""
+Точка входа
+"""
 
 	data = take_data()
 
@@ -75,4 +104,5 @@ def main():
 	
 	score, project = search("Хадаров Владимир", new_data)
 	print(f"Ты получил: {score}, за проект - {project}")	
+	
 main()
