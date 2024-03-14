@@ -16,9 +16,9 @@ def take_data():
 
 def create_newtable(data):
 	"""
-	Создаём новую таблицу с логинами и паролями
+	Создаёмт новую таблицу с логинами и паролями
 
-	data -  данные таблицы
+	data -  данные для новой таблицы
 	"""
 	with open('students_password.csv', 'w') as csvfile:
 		for row in data:
@@ -26,9 +26,18 @@ def create_newtable(data):
 			csv_write.writerow(row)
 		
 def generate_login(FIO):
+	"""
+	Генерирует логин на основе ФИО
+
+	FIO -  строка содержащая ФИО
+	"""
 	return FIO[0] + '_' + FIO[1][0] + FIO[2][0] 
 	
 def generate_password():
+	"""
+	Генерирует пароль который содержит заглавные, прописные символы англ алфавита а также цифры. состоит из 8 символов
+	"""
+	
 	password = []
 	
 	S = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -54,6 +63,11 @@ def generate_password():
 	return res_pass
 
 def change_data(data):
+	"""
+	Обновляет данные таблицы, добавляет логин и пароль каждому пользователю
+
+	data -  данные из таблицы для редактирования
+	"""
 	new_data = [data[0]]
 	 
 	for row in data[1:]:
